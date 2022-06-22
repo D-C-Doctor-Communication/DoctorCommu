@@ -2,6 +2,8 @@ plugins {
     id 'com.android.application'
 }
 
+apply plugin: 'com.google.gms.google-services'
+
 android {
     compileSdk 31
 
@@ -28,6 +30,17 @@ android {
 }
 
 dependencies {
+    //gson
+    implementation 'com.google.code.gson:gson:2.8.8'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:design:30.0.0'
+    //심각도 그래프
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    //증상등록 - 캘린더
+    implementation "com.github.prolificinteractive:material-calendarview:1.4.3"
+    implementation "androidx.preference:preference:1.1.1"
+    //캘린더 버전(LocalDate)문제 관련
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.3.0'
 
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.1'
@@ -35,4 +48,16 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    //import firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:30.0.0')
+    implementation 'com.google.firebase:firebase-database'
+    //firebase SDK for google analytics
+    implementation 'com.google.firebase:firebase-analytics'
+    // Declare the dependency for the Firebase Authentication library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-messaging:23.0.5'
+    // Also declare the dependency for the Google Play services library and specify its version
+    implementation 'com.google.android.gms:play-services-auth:20.2.0'
 }

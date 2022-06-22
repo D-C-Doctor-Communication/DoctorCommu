@@ -2,18 +2,23 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dc.doctor_communication">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:protectionLevel="signature|setup|privileged"
+        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DoctorCommu">
         <activity
-            android:name=".SigninActivity"
+            android:name=".Emergency.EmergencySearchList"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashScreen.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +26,52 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MedicalChart.DataInfo_PopupActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/popupTheme" />
+        <activity
+            android:name=".MedicalChart.MC_PopupActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/popupTheme" />
+        <activity
+            android:name=".DoctorMeeting.MeetingDoc"
+            android:theme="@style/Theme.AppCompat.Light" />
+        <activity
+            android:name=".Settings.SettingActivity"
+            android:theme="@style/Theme.AppCompat.Light" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".Recording.Recording"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".SymptomRegistration.SearchList" />
+        <activity android:name=".SymptomRegistration.Search" />
+        <activity android:name=".SymptomRegistration.SelectPattern" />
+        <activity android:name=".SymptomRegistration.SelectWorse" />
+        <activity android:name=".SymptomRegistration.OtherSymptom" />
+        <activity android:name=".SymptomRegistration.SelectBody_head" />
+        <activity android:name=".SymptomRegistration.SelectBody_stomach" />
+        <activity android:name=".SymptomRegistration.SelectBody_waist" />
+        <activity android:name=".SymptomRegistration.SelectBody_arm" />
+        <activity android:name=".SymptomRegistration.SelectBody_hand" />
+        <activity android:name=".SymptomRegistration.SelectBody_chest" />
+        <activity android:name=".SymptomRegistration.SelectBody_buttock" />
+        <activity android:name=".SymptomRegistration.SelectBody_leg" />
+        <activity android:name=".SymptomRegistration.SelectBody_back" />
+        <activity android:name=".SymptomRegistration.SelectBody_foot" />
+        <activity android:name=".SymptomRegistration.SelectBody_face" />
+        <activity android:name=".SymptomRegistration.SelectBody_body" />
+        <activity android:name=".SymptomRegistration.SelectLevel" />
+        <activity android:name=".SymptomRegistration.AddDetails" />
+        <activity
+            android:name=".SignActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".RegisterActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>
