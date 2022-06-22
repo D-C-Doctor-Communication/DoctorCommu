@@ -419,6 +419,7 @@ public class Fragment_conditionAnalysis extends Fragment {
             Collections.sort(list_entries, (obj1, obj2) -> {   // 내림 차순으로 정렬
                 return obj2.getValue().compareTo(obj1.getValue());
             });
+
             TextView[] otc = {one,two,three};
             TextView[] cnt = {count1,count2,count3};
             Log.d("result","");
@@ -459,7 +460,8 @@ public class Fragment_conditionAnalysis extends Fragment {
                 }
                 otc[2].setText("해당없음");
                 cnt[2].setText("0");
-            }else if (list_entries.size()==3){
+            }else {
+                list_entries.size();
                 Log.d("datadata",list_entries.get(0).getValue().toString());
                 Log.d("datadata",list_entries.get(1).getValue().toString());
                 Log.d("datadata",list_entries.get(2).getValue().toString());
