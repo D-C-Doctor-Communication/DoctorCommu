@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.dc.doctor_communication.R;
 import com.dc.doctor_communication.SignActivity;
 import com.google.firebase.FirebaseApp;
 
@@ -18,14 +19,12 @@ public class SplashActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
 
 
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(getApplicationContext(), SignActivity.class);
-                startActivity(intent); //2초 후 MainActivity를 실행해주자
-
-                finish();
-            }
+        handler.postDelayed(() -> {
+            Intent intent = new Intent(getApplicationContext(), SignActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            startActivity(intent);
+            overridePendingTransition(R.anim.translate_none, R.anim.translate_none);
+            finish();
         }, 2000);
     }
 }

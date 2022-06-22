@@ -57,8 +57,10 @@ public class SignActivity extends AppCompatActivity{
         // 회원가입으로 이동
         mResigettxt.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent);
-            overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
+            overridePendingTransition(R.anim.translate_none,R.anim.translate_none);
+            finish();
         });
 
         // 로그인 버튼
@@ -81,6 +83,7 @@ public class SignActivity extends AppCompatActivity{
                             if(task.isSuccessful()){
                                 Toast.makeText(getApplicationContext(), "로그인 성공", Toast.LENGTH_SHORT).show();
                                 Intent in = new Intent(getApplicationContext(), MainActivity.class);
+                                in.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                 startActivity(in);
                                 overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                                 finish();
