@@ -429,6 +429,18 @@
                 app:layout_constraintTop_toBottomOf="@+id/selectedDataLayout"
                 android:indicatorRight="?android:attr/expandableListPreferredItemIndicatorRight"
                 android:scrollbars="none"/>
+
+            <ImageView
+                android:id="@+id/notice_noSelect"
+                android:visibility="visible"
+                android:layout_width="170dp"
+                android:layout_height="100dp"
+                android:src="@drawable/icon_dc_warning"
+                app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
             <ImageView
                 android:id="@+id/notice_noData"
                 android:visibility="gone"
