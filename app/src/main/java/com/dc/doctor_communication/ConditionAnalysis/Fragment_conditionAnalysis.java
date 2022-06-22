@@ -114,8 +114,6 @@ public class Fragment_conditionAnalysis extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_condition_analysis,container,false);
 
 
-
-
         /* SharedPreference 사용한 객체 정보 사용 */
         Gson gson =new GsonBuilder().create();
         SharedPreferences gsonSharedPreferences = getActivity().getSharedPreferences("gsonDataFile",Context.MODE_PRIVATE);
@@ -125,9 +123,11 @@ public class Fragment_conditionAnalysis extends Fragment {
         Log.d("gsonIndex",gsonIndex+"");
         for (int i=0;i<gsonIndex;i++){
             String gsonSymptom = gsonSharedPreferences.getString(Integer.toString(i),"e");
-            if(!gsonSymptom.equals("e")) {
+            Log.e("화긴",gsonSymptom);
+            if(!gsonSymptom.equals(" ")) {
                 Symptom symptom = gson.fromJson(gsonSymptom, Symptom.class);
                 FireData.symptoms.add(i, symptom);
+
             }
         }
 
@@ -159,6 +159,7 @@ public class Fragment_conditionAnalysis extends Fragment {
         lineChart = view.findViewById(R.id.condition_chart);
         //그래프 증상선택 버튼
         select_symptom = view.findViewById(R.id.select_symptom);
+
 
 
         Log.d("파이어베이스",FireData.symptoms.size()+"");

@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import org.threeten.bp.DayOfWeek;
 import org.threeten.bp.LocalDate;
@@ -139,8 +140,6 @@ public class Fragment_medicalChart extends Fragment {
         //캘린더 기본 선택된 날짜 지정
         materialCalendarView.setDateSelected(date,true);
         //캘린더 점찍기
-        Log.d("End", EndDateOfMonth()+"");
-        Log.d("End", Month+"");
         for(int i = 1; i <= EndDateOfMonth(); i++){
             fire_date = String.valueOf(i);
             if((int)(Math.log10(i)+1) == 1) fire_date = "0" + fire_date;
@@ -417,6 +416,8 @@ public class Fragment_medicalChart extends Fragment {
                 Log.d("마지막 확인","add됨");
 
 
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.detach(this).attach(this).commit();
 
 
                 //일정이 존재하면 listView visible로 바꿈
@@ -457,6 +458,38 @@ public class Fragment_medicalChart extends Fragment {
                         myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(0)).child("place").setValue(location);
                         myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(0)).child("time").setValue(selectedTime);
                         myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(0)).child("clinic_type").setValue(typeOfSchedule);
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) { }
+                });
+
+            }
+        }
+
+        for(int i = 1; i <= EndDateOfMonth(); i++){
+            fire_date = String.valueOf(i);
+            if((int)(Math.log10(i)+1) == 1) fire_date = "0" + fire_date;
+            if(Month<10) fire_date = Year +"0"+ Month +""+ fire_date;
+            else fire_date = Year +""+ Month +""+ fire_date;
+            for(int j=0; j<5; j++){
+                String finalStringDateValue = fire_date;
+                myRef.child(uid).child("date").child(finalStringDateValue).child(String.valueOf(j)).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String get_symptom = snapshot.child("symptom").getValue(String.class);
+                        if(!(Objects.equals(get_symptom, "e")) && get_symptom != null){
+                            String dateValue = finalStringDateValue;
+                            Log.d("get_dateValue", dateValue);
+
+                            int year = Integer.parseInt(dateValue.substring(0,4));
+                            int month = Integer.parseInt(dateValue.substring(4,6));
+                            int dayy = Integer.parseInt(dateValue.substring(6));
+
+                            calendar.set(year,month-1,dayy);
+                            CalendarDay day = CalendarDay.from(calendar);
+                            Log.d("점찍기","데이터 add됨,"+day.getDate());
+                            datess.add(day);
+                        }
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) { }
