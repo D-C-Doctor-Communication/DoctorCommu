@@ -24,7 +24,7 @@ public class SelectBody_arm extends AppCompatActivity {
     List<String> BODY = new ArrayList<>();
     String [] select_arm; //선택한 팔 부위
     int repeat;
-    Boolean emergency = false;
+    boolean emergency = false;
 
     public void onCreate(Bundle savedInstanceState) {
 
@@ -37,7 +37,6 @@ public class SelectBody_arm extends AppCompatActivity {
         part = intent.getExtras().getInt("part");
         repeat = intent.getExtras().getInt("repeat");
         emergency = intent.getBooleanExtra("emergency",false);
-        Log.e("emergency", emergency.toString());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_body_arm);
 
@@ -197,6 +196,7 @@ public class SelectBody_arm extends AppCompatActivity {
                 intent.putExtra("symptom",symptom);
                 intent.putExtra("part",part);
                 intent.putExtra("repeat",repeat);
+                intent.putExtra("emergency",emergency);
 
                 //세부 부위가 선택되어 있으면 BODY에 넣기
                 if(arm01.isSelected()){
@@ -261,6 +261,7 @@ public class SelectBody_arm extends AppCompatActivity {
                 Intent intent = new Intent(SelectBody_arm.this, SearchList.class);
                 intent.putExtra("symptom",symptom);
                 intent.putExtra("repeat",repeat);
+                intent.putExtra("emergency",emergency);
                 startActivity(intent);
                 overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                 finish();

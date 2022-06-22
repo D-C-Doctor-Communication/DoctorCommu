@@ -37,6 +37,7 @@ public class AddDetails extends AppCompatActivity{
     String selected_levelNm;
     int part;
     int repeat;
+    boolean emergency;
     TextView osymptom;
     String symptom;
     FirebaseAuth firebaseAuth;
@@ -63,6 +64,7 @@ public class AddDetails extends AppCompatActivity{
         selected_worse = intent.getStringArrayExtra("worse");
         selected_osymptom = intent.getStringArrayExtra("osymptom");
         repeat = intent.getExtras().getInt("repeat");
+        emergency = intent.getBooleanExtra("emergency",false);
 
         firebaseAuth =  FirebaseAuth.getInstance();
 
@@ -72,17 +74,20 @@ public class AddDetails extends AppCompatActivity{
         add_details = findViewById(R.id.add_details);
         osymptom=findViewById(R.id.leveltext2);
 
-        selected_symptom= selected_osymptom[0];
-        for(int i = 1; i< selected_osymptom.length; i++){
-            if(selected_osymptom.length==2)
-                selected_symptom+="/";
-            selected_symptom+= selected_osymptom[i];
-            if((i+1)!= selected_osymptom.length)
-                selected_symptom+="/";
-        }
 
-        //받아온 동반 증상을 textview에 띄우기
-        osymptom.setText(selected_symptom);
+        if(selected_osymptom != null) {
+            selected_symptom= selected_osymptom[0];
+            for(int i = 1; i< selected_osymptom.length; i++){
+                if(selected_osymptom.length==2)
+                    selected_symptom+="/";
+                selected_symptom+= selected_osymptom[i];
+                if((i+1)!= selected_osymptom.length)
+                    selected_symptom+="/";
+            }
+
+            //받아온 동반 증상을 textview에 띄우기
+            osymptom.setText(selected_symptom);
+        }
 
         addpage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,6 +105,7 @@ public class AddDetails extends AppCompatActivity{
                 intent.putExtra("osymptom",selected_osymptom);
                 intent.putExtra("details",select_details);
                 intent.putExtra("repeat",repeat);
+                intent.putExtra("emergency",emergency);
 
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference myRef = database.getReference().child("users");
@@ -107,16 +113,25 @@ public class AddDetails extends AppCompatActivity{
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 String uid = user.getUid();
 
-                myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("symptom").setValue(symptom);
-                myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("part").setValue(selected_body[0]);
-                myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("painLevel").setValue(selected_levelNm);
-                myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("pain_characteristics").setValue(selected_pattern[0]);
-                myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("pain_situation").setValue(selected_worse[0]);
-                myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("accompany_pain").setValue(selected_osymptom[0]);
-                myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("additional").setValue(select_details);
+                if(emergency) {
+                    Log.d("fire_test",symptom+", "+selected_body[0]);
+                    myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("symptom").setValue(symptom);
+                    myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("part").setValue(selected_body[0]);
+                    myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("painLevel").setValue(selected_levelNm);
+                    myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("pain_characteristics").setValue(selected_pattern[0]);
+                    myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("additional").setValue(select_details);
 
-
-
+                    myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("accompany_pain").setValue(" ");
+                    myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("pain_situation").setValue(" ");
+                } else {
+                    myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("symptom").setValue(symptom);
+                    myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("part").setValue(selected_body[0]);
+                    myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("painLevel").setValue(selected_levelNm);
+                    myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("pain_characteristics").setValue(selected_pattern[0]);
+                    myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("pain_situation").setValue(selected_worse[0]);
+                    myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("accompany_pain").setValue(selected_osymptom[0]);
+                    myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("additional").setValue(select_details);
+                }
 
                 /* SharedPreference 사용한 객체 정보 저장 */
 
@@ -128,16 +143,24 @@ public class AddDetails extends AppCompatActivity{
 
                 //인덱스값
                 int gsonIndex = gsonIndexSp.getInt("gsonIndex",0);
-                Log.d("myapp","인덱스값 : "+gsonIndex);
+                Log.d("index_value","인덱스값 : "+gsonIndex);
 
                 //데이터 객체 생성 + 저장
                 Date today = new Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-                Symptom sympObj = new Symptom(sdf.format(today),symptom,selected_body[0],selected_levelNm,selected_pattern[0],selected_worse[0],selected_osymptom[0],select_details);
+
+
+                Symptom sympObj;
+                try {
+                    sympObj = new Symptom(sdf.format(today),symptom,selected_body[0],selected_levelNm,selected_pattern[0],selected_worse[0],selected_osymptom[0],select_details);
+                } catch (Exception e) {
+                    // 빠른 등록 시 exception 발생
+                    sympObj = new Symptom(sdf.format(today),symptom,selected_body[0],selected_levelNm,selected_pattern[0]," "," ",select_details);
+                }
+
                 String symptomGson = "";
                 Gson gson = new GsonBuilder().create();
                 symptomGson= gson.toJson(sympObj,Symptom.class);
-
                 //키값에 value 저장
                 gsonEditor.putString(Integer.toString(gsonIndex),symptomGson);
                 //키값 ++
@@ -145,11 +168,6 @@ public class AddDetails extends AppCompatActivity{
                 //변경정보 저장
                 gsonEditor.commit();
                 gsonIndexEditor.commit();
-
-
-
-
-
 
                 SharedPreferences sharedPreferences= getSharedPreferences("symptom", MODE_PRIVATE);    // test 이름의 기본모드 설정
                 SharedPreferences.Editor editor= sharedPreferences.edit(); //sharedPreferences를 제어할 editor를 선언
@@ -174,6 +192,7 @@ public class AddDetails extends AppCompatActivity{
                 intent.putExtra("pattern",selected_pattern);
                 intent.putExtra("worse",selected_worse);
                 intent.putExtra("repeat",repeat);
+                intent.putExtra("emergency",emergency);
                 startActivity(intent);
                 overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
 

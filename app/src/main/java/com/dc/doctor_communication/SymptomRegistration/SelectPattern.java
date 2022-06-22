@@ -47,6 +47,8 @@ public class SelectPattern extends AppCompatActivity {
     int part;
     String selected_levelNm;
     int repeat;
+    boolean emergency;
+
     @SuppressLint("WrongViewCast")
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,7 @@ public class SelectPattern extends AppCompatActivity {
         part =intent.getExtras().getInt("part");
         selected_levelNm= String.valueOf(intent.getExtras().getInt("levelNm"));
         repeat = intent.getExtras().getInt("repeat");
+        emergency = intent.getBooleanExtra("emergency",false);
         Log.d("count", repeat+"");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_pattern);
@@ -101,7 +104,15 @@ public class SelectPattern extends AppCompatActivity {
                         cnt++;
                     }
                 }
-                Intent intent = new Intent(SelectPattern.this, SelectWorse.class);
+
+
+                Intent intent;
+                if(emergency) {
+                    intent = new Intent(SelectPattern.this, AddDetails.class);
+                    intent.putExtra("emergency",emergency);
+                } else {
+                    intent = new Intent(SelectPattern.this, SelectWorse.class);
+                }
                 intent.putExtra("symptom",symptom);
                 intent.putExtra("part",part);
                 intent.putExtra("bparts",selected_body);
@@ -139,6 +150,7 @@ public class SelectPattern extends AppCompatActivity {
                 intent.putExtra("part",part);
                 intent.putExtra("bparts",selected_body);
                 intent.putExtra("repeat",repeat);
+                intent.putExtra("emergency",emergency);
 
                 startActivity(intent);
                 overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);

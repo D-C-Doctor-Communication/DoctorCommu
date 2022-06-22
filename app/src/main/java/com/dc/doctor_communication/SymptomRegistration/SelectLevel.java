@@ -24,6 +24,7 @@ public class SelectLevel extends AppCompatActivity {
     StringBuilder change_level;
     String select_level;//선택한 통증 레벨(설명)
     String selected_body[]; //전 페이지 선택한 부위
+    boolean emergency;
     int repeat;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class SelectLevel extends AppCompatActivity {
         part =intent.getExtras().getInt("part");
         selected_body = intent.getStringArrayExtra("bparts");
         repeat = intent.getExtras().getInt("repeat");
+        emergency = intent.getBooleanExtra("emergency",false);
         Log.d("repeat", repeat+"");
         Log.e("backpart", String.valueOf(part));
         super.onCreate(savedInstanceState);
@@ -80,6 +82,7 @@ public class SelectLevel extends AppCompatActivity {
                 intent.putExtra("bparts",selected_body);
                 intent.putExtra("levelNm",num);
                 intent.putExtra("repeat",repeat);
+                intent.putExtra("emergency",emergency);
 
                 startActivity(intent);
                 overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
@@ -101,6 +104,7 @@ public class SelectLevel extends AppCompatActivity {
                         intent.putExtra("symptom", symptom);
                         intent.putExtra("part", part);
                         intent.putExtra("repeat",repeat);
+                        intent.putExtra("emergency",emergency);
 
                         startActivity(intent);
                         overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
@@ -112,6 +116,7 @@ public class SelectLevel extends AppCompatActivity {
                         intent.putExtra("symptom", symptom);
                         intent.putExtra("part", part);
                         intent.putExtra("repeat",repeat);
+                        intent.putExtra("emergency",emergency);
 
                         startActivity(intent);
                         overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
@@ -123,6 +128,7 @@ public class SelectLevel extends AppCompatActivity {
                         intent.putExtra("symptom", symptom);
                         intent.putExtra("part", part);
                         intent.putExtra("repeat",repeat);
+                        intent.putExtra("emergency",emergency);
 
                         startActivity(intent);
                         overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
@@ -134,6 +140,7 @@ public class SelectLevel extends AppCompatActivity {
                         intent.putExtra("symptom", symptom);
                         intent.putExtra("part", part);
                         intent.putExtra("repeat",repeat);
+                        intent.putExtra("emergency",emergency);
 
                         startActivity(intent);
                         overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
@@ -145,6 +152,7 @@ public class SelectLevel extends AppCompatActivity {
                         intent.putExtra("symptom", symptom);
                         intent.putExtra("part", part);
                         intent.putExtra("repeat",repeat);
+                        intent.putExtra("emergency",emergency);
 
                         startActivity(intent);
                         overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
@@ -156,6 +164,7 @@ public class SelectLevel extends AppCompatActivity {
                         intent.putExtra("symptom", symptom);
                         intent.putExtra("part", part);
                         intent.putExtra("repeat",repeat);
+                        intent.putExtra("emergency",emergency);
 
                         startActivity(intent);
                         overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
@@ -167,6 +176,7 @@ public class SelectLevel extends AppCompatActivity {
                         intent.putExtra("symptom", symptom);
                         intent.putExtra("part", part);
                         intent.putExtra("repeat",repeat);
+                        intent.putExtra("emergency",emergency);
 
                         startActivity(intent);
                         overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
@@ -178,6 +188,7 @@ public class SelectLevel extends AppCompatActivity {
                         intent.putExtra("symptom", symptom);
                         intent.putExtra("part", part);
                         intent.putExtra("repeat",repeat);
+                        intent.putExtra("emergency",emergency);
 
                         startActivity(intent);
                         overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
@@ -189,6 +200,7 @@ public class SelectLevel extends AppCompatActivity {
                         intent.putExtra("symptom", symptom);
                         intent.putExtra("part", part);
                         intent.putExtra("repeat",repeat);
+                        intent.putExtra("emergency",emergency);
 
                         startActivity(intent);
                         overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
@@ -200,6 +212,7 @@ public class SelectLevel extends AppCompatActivity {
                         intent.putExtra("symptom", symptom);
                         intent.putExtra("part", part);
                         intent.putExtra("repeat",repeat);
+                        intent.putExtra("emergency",emergency);
 
                         startActivity(intent);
                         overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
@@ -211,6 +224,7 @@ public class SelectLevel extends AppCompatActivity {
                         intent.putExtra("symptom", symptom);
                         intent.putExtra("part", part);
                         intent.putExtra("repeat",repeat);
+                        intent.putExtra("emergency",emergency);
 
                         startActivity(intent);
                         overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
@@ -222,6 +236,7 @@ public class SelectLevel extends AppCompatActivity {
                         intent.putExtra("symptom", symptom);
                         intent.putExtra("part", part);
                         intent.putExtra("repeat",repeat);
+                        intent.putExtra("emergency",emergency);
 
                         startActivity(intent);
                         overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);

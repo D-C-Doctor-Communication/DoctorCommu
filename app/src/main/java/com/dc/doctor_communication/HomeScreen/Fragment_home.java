@@ -121,7 +121,7 @@ public class Fragment_home extends Fragment {
             getActivity().overridePendingTransition(R.anim.translate_none,R.anim.translate_none);
         });
 
-//카드3 - 빠른 작업
+//카드3 - 긴급 통증
         btn_recording.setOnClickListener(v -> {
             Intent addSymptom = new Intent(getContext(), EmergencySearchList.class);
             addSymptom.putExtra("count",count);
@@ -223,6 +223,8 @@ public class Fragment_home extends Fragment {
             HomeListViewAdapter adapter2 = new HomeListViewAdapter();
             //Adapter 지정
             listView.setAdapter(adapter2);
+
+
 
             for(int i=0; i<5; i++){
                 Log.d("fire_j", String.valueOf(i));

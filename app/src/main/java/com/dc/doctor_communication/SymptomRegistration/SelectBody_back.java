@@ -22,6 +22,7 @@ public class SelectBody_back extends AppCompatActivity {
     String [] BACK ={"왼쪽 승모근","오른쪽 승모근","왼쪽 어깨","오른쪽 어깨","등 전체","왼쪽 허리","오른쪽 허리"}; //등 세부 부위
     List<String> BODY = new ArrayList<>();
     String [] select_back; //선택한 머리 부위
+    boolean emergency;
     int repeat;
     public void onCreate(Bundle savedInstanceState) {
 
@@ -32,6 +33,7 @@ public class SelectBody_back extends AppCompatActivity {
         symptom = intent.getExtras().getString("symptom");
         part = intent.getExtras().getInt("part");
         repeat = intent.getExtras().getInt("repeat");
+        emergency = intent.getExtras().getBoolean("emergency",false);
         Log.d("repeat", repeat+"");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_body_hand);
@@ -148,6 +150,7 @@ public class SelectBody_back extends AppCompatActivity {
                 intent.putExtra("symptom",symptom);
                 intent.putExtra("part",part);
                 intent.putExtra("repeat",repeat);
+                intent.putExtra("emergency",emergency);
 
                 //손 세부 부위가 선택되어 있으면 BODY에 넣기
                 if(back01.isSelected()){
@@ -202,6 +205,7 @@ public class SelectBody_back extends AppCompatActivity {
                 Intent intent = new Intent(SelectBody_back.this, SearchList.class);
                 intent.putExtra("symptom",symptom);
                 intent.putExtra("repeat",repeat);
+                intent.putExtra("emergency",emergency);
                 startActivity(intent);
                 overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                 finish();

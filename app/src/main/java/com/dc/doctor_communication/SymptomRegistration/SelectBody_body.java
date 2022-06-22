@@ -23,6 +23,7 @@ public class SelectBody_body extends AppCompatActivity {
     String [] WBODY ={"전신"}; //세부 부위
     List<String> BODY = new ArrayList<>();
     String [] select_body; //선택한 세부 부위
+    boolean emergency;
     int repeat;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class SelectBody_body extends AppCompatActivity {
         symptom = intent.getExtras().getString("symptom");
         part = intent.getExtras().getInt("part");
         repeat = intent.getExtras().getInt("repeat");
+        emergency = intent.getExtras().getBoolean("emergency",false);
         Log.d("repeat", repeat+"");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_body_body);
@@ -66,6 +68,7 @@ public class SelectBody_body extends AppCompatActivity {
                 intent.putExtra("symptom",symptom);
                 intent.putExtra("part",part);
                 intent.putExtra("repeat",repeat);
+                intent.putExtra("emergency",emergency);
 
                 //가슴슴 세부 부위가 선택되 있으면 BODY에 넣기
                 if(body01.isSelected()){
@@ -102,6 +105,7 @@ public class SelectBody_body extends AppCompatActivity {
                 Intent intent = new Intent(SelectBody_body.this, SearchList.class);
                 intent.putExtra("symptom",symptom);
                 intent.putExtra("repeat",repeat);
+                intent.putExtra("emergency",emergency);
                 startActivity(intent);
                 overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                 finish();

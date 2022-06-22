@@ -31,6 +31,7 @@ public class SelectBody_head extends AppCompatActivity {
     String []HEAD={"눈주위","이마","관자놀이","머리 전체","뒷머리"}; //머리 세부 부위
     List<String> BODY = new ArrayList<>();
     String []select_head; //선택한 머리 부위
+    boolean emergency;
     private FirebaseAuth firebaseAuth;
     int repeat;
 
@@ -44,6 +45,7 @@ public class SelectBody_head extends AppCompatActivity {
         symptom = intent.getExtras().getString("symptom");
         part = intent.getExtras().getInt("part");
         repeat = intent.getExtras().getInt("repeat");
+        emergency = intent.getExtras().getBoolean("emergency",false);
         Log.d("repeat", repeat+"");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_body_head);
@@ -132,6 +134,7 @@ public class SelectBody_head extends AppCompatActivity {
                 intent.putExtra("symptom",symptom);
                 intent.putExtra("part",part);
                 intent.putExtra("repeat",repeat);
+                intent.putExtra("emergency",emergency);
 
                 //머리 세부 부위가 선택되어 있으면 BODY에 넣기
                 if(head01.isSelected()){
@@ -180,6 +183,7 @@ public class SelectBody_head extends AppCompatActivity {
                 Intent intent = new Intent(SelectBody_head.this, SearchList.class);
                 intent.putExtra("symptom",symptom);
                 intent.putExtra("repeat",repeat);
+                intent.putExtra("emergency",emergency);
                 startActivity(intent);
                 overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                 finish();

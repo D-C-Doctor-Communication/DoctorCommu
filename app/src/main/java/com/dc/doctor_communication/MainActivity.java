@@ -53,19 +53,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //splash
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.R){
-            final WindowInsetsController insetsController = getWindow().getInsetsController();
-            if(insetsController!=null){
-                insetsController.hide(WindowInsets.Type.statusBars());
-            }
-        }
-        else{
-            getWindow().setFlags(
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN
-            );
-        }
 
         //home,진료기록,상태분석 fragment
         homeFragment = new Fragment_home();

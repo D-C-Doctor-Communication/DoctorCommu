@@ -87,7 +87,6 @@ public class EmergencySearchList extends AppCompatActivity {
         mContext=this;
         search_text = (EditText)findViewById(R.id.search_text);
         listView = (ListView)findViewById(R.id.search_list);
-        Log.e("hihi", "onCreate: ");
 
         Intent intent = getIntent();
         repeat = intent.getExtras().getInt("repeat");

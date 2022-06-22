@@ -12,7 +12,7 @@
         android:fontFamily="@font/nanumsquarebold"
         android:gravity="center"
         android:textColor="#0078ff"
-        android:text="동반 증의 양상"
+        android:text="동반 증상의 양상"
         android:textSize="20sp"
         android:layout_marginTop="131dp"
         android:layout_marginLeft="32dp"
